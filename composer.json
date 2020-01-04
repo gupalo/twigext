@@ -1,0 +1,22 @@
+{
+    "name": "gupalo/twigext",
+    "description": "Twig Extensions",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.3",
+        "twig/twig": "^3.0",
+        "symfony/property-access": "^5.0",
+        "gupalo/dateutils": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gupalo\\TwigExt\\": "src/TwigExt/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gupalo\\Tests\\TwigExt\\": "tests/TwigExt/"
+        }
+    }
+}
