@@ -49,15 +49,15 @@ class FormatExtension extends AbstractExtension
             return 'ERR';
         }
 
-        if ($value < 0.0001 && $value > -0.0001) {
+        if ($this->isAlmostZero($value)) {
             return '<span class="text-muted">0</span>';
         }
 
         $result = number_format($value, $precision);
         if ($muteDot > 0) {
-            $result = preg_replace('#\.\d+$#', '<span class="text-muted">$0</span>', $result);
+            $result = preg_replace('#\.\d+$#', '<span class="text-muted">0</span>', $result);
         } elseif ($muteDot === 0) {
-            $result = preg_replace('#\.0+$#', '<span class="text-muted">$0</span>', $result);
+            $result = preg_replace('#\.0+$#', '<span class="text-muted">0</span>', $result);
         }
 
         return $result;
@@ -72,7 +72,7 @@ class FormatExtension extends AbstractExtension
             return 'ERR';
         }
 
-        if ($value < 0.0001 && $value > -0.0001) {
+        if ($this->isAlmostZero($value)) {
             return '<span class="text-muted">0</span>';
         }
 
@@ -91,7 +91,7 @@ class FormatExtension extends AbstractExtension
             return 'ERR';
         }
 
-        if ($value < 0.0001) {
+        if ($this->isAlmostZero($value)) {
             return '<span class="text-muted">0</span>';
         }
 
@@ -99,9 +99,9 @@ class FormatExtension extends AbstractExtension
         $result = preg_replace('#^([^0]\d*)\.\d+$#', '$1', $result);
 
         if ($muteDot > 0) {
-            $result = preg_replace('#\.\d+$#', '<span class="text-muted">$0</span>', $result);
+            $result = preg_replace('#\.\d+$#', '<span class="text-muted">0</span>', $result);
         } elseif ($muteDot === 0) {
-            $result = preg_replace('#\.0+$#', '<span class="text-muted">$0</span>', $result);
+            $result = preg_replace('#\.0+$#', '<span class="text-muted">0</span>', $result);
         }
 
         return $result;
@@ -117,7 +117,7 @@ class FormatExtension extends AbstractExtension
         }
 
         $class = null;
-        if (abs($value) < 0.0001) {
+        if ($this->isAlmostZero($value)) {
             $class = 'text-muted';
         } elseif ($value < 0) {
             $class = 'text-danger';
@@ -185,5 +185,10 @@ class FormatExtension extends AbstractExtension
         }
 
         return date($format, $value);
+    }
+
+    private function isAlmostZero($value): bool
+    {
+        return ($value > -0.0001 && $value < 0.0001);
     }
 }
