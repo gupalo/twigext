@@ -44,7 +44,7 @@ class FormatExtension extends AbstractExtension
         return [
             new TwigFilter('int', [$this, 'int'], ['is_safe' => ['html']]),
             new TwigFilter('float', [$this, 'float'], ['is_safe' => ['html']]),
-            new TwigFilter('money', [$this, 'float'], ['is_safe' => ['html']]),
+            new TwigFilter('money', [$this, 'money'], ['is_safe' => ['html']]),
             new TwigFilter('percents', [$this, 'percents'], ['is_safe' => ['html']]),
             new TwigFilter('date_full', [$this, 'dateFull'], ['is_safe' => ['html']]),
             new TwigFilter('date_short', [$this, 'dateShort'], ['is_safe' => ['html']]),
@@ -77,7 +77,7 @@ class FormatExtension extends AbstractExtension
         return $result;
     }
 
-    public function money($value = null, string $currency = '$', int $precision = 2): string
+    public function money($value = null, string $currency = '', int $precision = 2): string
     {
         $value = $this->numberFromString($value);
         $result = $this->getSpecialNumberResult($value);
@@ -93,7 +93,7 @@ class FormatExtension extends AbstractExtension
 
         $result = preg_replace('#\.\d+$#', '<span class="text-muted">$0</span>', $result);
 
-        if (in_array($currency, ['$', '€', '₽', '₴', '£', '&dollar;', '&euro;', '&pound;', '＄', '﹩'], true) || preg_match('#^&\#[xa-fA-F\d]+;$#', $currency)) {
+        if (in_array($currency, ['', '$', '€', '₽', '₴', '£', '&dollar;', '&euro;', '&pound;', '＄', '﹩'], true) || preg_match('#^&\#[xa-fA-F\d]+;$#', $currency)) {
             $result = implode('', [$negativeSign, $currency, $result]);
         } elseif (preg_match('#^[A-Z]{3}$#', $currency)) {
             $result = implode('', [$currency, ' ', $negativeSign, $result]);
