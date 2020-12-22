@@ -56,11 +56,8 @@ class FormatExtension extends AbstractExtension
     {
         $value = $this->numberFromString($value);
         $result = $this->getSpecialNumberResult($value);
-        if ($result !== null) {
-            return $result;
-        }
 
-        return number_format($value);
+        return $result ?? number_format($value);
     }
 
     public function float($value = null, int $precision = 2): string

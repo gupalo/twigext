@@ -17,7 +17,7 @@ class ProgressExtension extends AbstractExtension
         ];
     }
 
-    public function progressClass(float $value, float $maxValue, $color = null)
+    public function progressClass(float $value, float $maxValue, $color = null): string
     {
         if ($maxValue === 0) {
             return '';
@@ -30,23 +30,22 @@ class ProgressExtension extends AbstractExtension
         ]);
     }
 
-    public function progressPercents(?float $value, $maxValue = 1)
+    public function progressPercents(?float $value, $maxValue = 1): string
     {
         return $this->progress($value, $maxValue, [$this, 'percents']);
     }
 
-    public function progressInt(?int $value, $maxValue)
+    public function progressInt(?int $value, $maxValue): string
     {
         return $this->progress($value, $maxValue, [$this, 'int']);
     }
 
-    public function progressFloat(?float $value, $maxValue, $precision = 2)
+    public function progressFloat(?float $value, $maxValue, $precision = 2): string
     {
         return $this->progress($value, $maxValue, [$this, 'float'], [$precision]);
     }
 
-    /** @noinspection PhpOptionalBeforeRequiredParametersInspection */
-    private function progress($value = null, ?float $maxValue, callable $funcFormat, $arguments = null)
+    private function progress($value = null, ?float $maxValue = 0, callable $funcFormat = null, $arguments = null): string
     {
         if (!$maxValue || !$value || ($value < 0.0001 && $value > -0.0001)) {
             return '';
@@ -54,16 +53,18 @@ class ProgressExtension extends AbstractExtension
 
         $percents = max(0, min(100, $value / $maxValue * 100));
 
-        $args = [$value];
-        if ($arguments) {
-            $args = array_merge($args, $arguments);
+        if ($funcFormat) {
+            $args = [$value];
+            if ($arguments) {
+                $args = array_merge($args, $arguments);
+            }
+            $result = call_user_func_array($funcFormat, $args);
         }
-        $result = call_user_func_array($funcFormat, $args);
 
         return sprintf('<div class="bar" style="width: %s%%"></div><span class="value">%s</span>', $percents, $result);
     }
 
-    private function int(float $value = null)
+    private function int(float $value = null): string
     {
         if ($value === null) {
             return '-';
@@ -72,7 +73,7 @@ class ProgressExtension extends AbstractExtension
         return number_format($value);
     }
 
-    private function float(float $value = null, $precision = 2)
+    private function float(float $value = null, $precision = 2): string
     {
         if ($value === null) {
             return '-';

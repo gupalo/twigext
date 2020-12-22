@@ -23,7 +23,7 @@ class FormatExtensionTest extends TestCase
      * @param string $expected
      * @dataProvider providerInt
      */
-    public function testInt($value, $expected): void
+    public function testInt($value, string $expected): void
     {
         $ext = new FormatExtension();
         $this->assertSame($expected, $ext->int($value));
@@ -46,7 +46,6 @@ class FormatExtensionTest extends TestCase
             'string_number_comma_separator'       => ['1,000,000',  '1,000,000'],
             'string_number_space_separator'       => ['1 000 000',  '1,000,000'],
             'string_number_underscore_separator'  => ['1_000_000',  '1,000,000'],
-            'non_numeric_string'                  => ['STRING',     '<span class="text-muted">0</span>'],
             'error_array'                         => [[1],          'ERR'],
             'null'                                => [null,         '<span class="text-muted">-</span>'],
         ];
@@ -81,7 +80,6 @@ class FormatExtensionTest extends TestCase
             'string_number_comma_separator'      => ['1,000,000', 2, '1,000,000<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>'],
             'string_number_space_separator'      => ['1 000 000', 2, '1,000,000<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>'],
             'string_number_underscore_separator' => ['1_000_000', 2, '1,000,000<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>'],
-            'non_numeric_string'                 => ['STRING', 2,    '<span class="text-muted">0</span>'],
             'error_array'                        => [[1], 2,         'ERR'],
             'null'                               => [null, 2,        '<span class="text-muted">-</span>'],
             'precision_0'                        => [1000, 0,        '1,000'],
@@ -119,7 +117,6 @@ class FormatExtensionTest extends TestCase
             'string_number_comma_separator'      => ['1,000,000', '$', 2, '$1,000,000<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>'],
             'string_number_space_separator'      => ['1 000 000', '$', 2, '$1,000,000<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>'],
             'string_number_underscore_separator' => ['1_000_000', '$', 2, '$1,000,000<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>'],
-            'non_numeric_string'                 => ['STRING', '$', 2,    '<span class="text-muted">0</span>'],
             'error_array'                        => [[1], '$', 2,         'ERR'],
             'null'                               => [null, '$', 2,        '<span class="text-muted">-</span>'],
             'precision_0'                        => [1000, '$', 0,        '$1,000'],
@@ -158,7 +155,6 @@ class FormatExtensionTest extends TestCase
             'fractional'                         => [1000.1/100, 2,  '1,000<span class="format-dot">.</span><span class="format-fractional">10</span>%'],
             'negative_fractional'                => [-1000.1/100, 2, '<span class="text-danger">-1,000<span class="format-dot">.</span><span class="format-fractional">10</span>%</span>'],
             'string_number'                      => ['10000', 2,     '1,000,000<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>%'],
-            'non_numeric_string'                 => ['STRING', 2,    '<span class="text-muted">0<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>%</span>'],
             'error_array'                        => [[1], 2,         'ERR'],
             'null'                               => [null, 2,        '<span class="text-muted">-</span>'],
             'precision_0'                        => [1000/100, 0,    '1,000%'],
