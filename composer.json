@@ -5,8 +5,8 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
-        "twig/twig": "^3.0",
-        "symfony/property-access": "^5.0",
+        "twig/twig": "^3.3",
+        "symfony/property-access": "^5.4|^6.0",
         "gupalo/dateutils": "^1.11"
     },
     "require-dev": {
