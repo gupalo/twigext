@@ -57,7 +57,7 @@ class FormatExtension extends AbstractExtension
         $value = $this->numberFromString($value);
         $result = $this->getSpecialNumberResult($value);
 
-        return $result ?? number_format($value);
+        return $result ?? number_format((float)$value);
     }
 
     public function float($value = null, int $precision = 2): string
@@ -68,7 +68,7 @@ class FormatExtension extends AbstractExtension
             return $result;
         }
 
-        $result = number_format($value, $precision);
+        $result = number_format((float)$value, $precision);
         $result = $this->formatFractionalPart($result);
 
         return $result;
@@ -85,7 +85,7 @@ class FormatExtension extends AbstractExtension
         $negativeSign = ($value < 0) ? '-' : '';
         $value = abs($value);
 
-        $result = number_format($value, $precision);
+        $result = number_format((float)$value, $precision);
         $result = $this->formatFractionalPart($result);
 
         $result = preg_replace('#\.\d+$#', '<span class="text-muted">$0</span>', $result);
