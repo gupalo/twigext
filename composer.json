@@ -4,10 +4,11 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": ">=7.4",
-        "twig/twig": "^3.3",
+        "php": ">=8.0.2",
+        "gupalo/arrayutils": "^1.9",
+        "gupalo/dateutils": "^1.13",
         "symfony/property-access": "^5.4|^6.0",
-        "gupalo/dateutils": "^1.11"
+        "twig/twig": "^3.5"
     },
     "require-dev": {
         "phpspec/prophecy-phpunit": "^2.0",
@@ -18,7 +19,7 @@
             "*": "dist"
         },
         "platform": {
-            "php": "7.4"
+            "php": "8.0.2"
         },
         "sort-packages": true
     },
