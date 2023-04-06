@@ -14,16 +14,15 @@ class EncodingExtension extends AbstractExtension
             new TwigFilter('base64_encode', 'base64_encode'),
             new TwigFilter('base64_decode', 'base64_decode'),
             new TwigFilter('md5', 'md5'),
-            new TwigFilter('seed', [$this, 'seed']),
         ];
     }
+
     public function getFunctions(): array
     {
         return [
             new TwigFunction('base64_encode', 'base64_encode'),
             new TwigFunction('base64_decode', 'base64_decode'),
             new TwigFunction('md5', 'md5'),
-            new TwigFunction('seed', [$this, 'seed']),
         ];
     }
 }

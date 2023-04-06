@@ -4,10 +4,21 @@ namespace Gupalo\TwigExt;
 
 use Gupalo\ArrayUtils\ArrayRandom;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
 
 class RandomExtension extends AbstractExtension
 {
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('random_day', [$this, 'randomDay'], ['is_safe' => ['html']]),
+            new TwigFilter('random_hour', [$this, 'randomHour'], ['is_safe' => ['html']]),
+            new TwigFilter('random_item', [$this, 'randomItem'], ['is_safe' => ['html']]),
+            new TwigFilter('random_items', [$this, 'randomItems'], ['is_safe' => ['html']]),
+        ];
+    }
+
     public function getFunctions(): array
     {
         return [
