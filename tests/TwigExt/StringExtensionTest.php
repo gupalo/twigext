@@ -8,12 +8,17 @@ use Twig\TwigFilter;
 
 class StringExtensionTest extends TestCase
 {
+    private StringExtension $ext;
+
+    protected function setUp(): void
+    {
+        $this->ext = new StringExtension();
+    }
+
     public function testGetFilters(): void
     {
-        $ext = new StringExtension();
+        $filter = $this->ext->getFilters()[0];
 
-        $filter = $ext->getFilters()[0];
-
-        $this->assertInstanceOf(TwigFilter::class, $filter);
+        self::assertInstanceOf(TwigFilter::class, $filter);
     }
 }

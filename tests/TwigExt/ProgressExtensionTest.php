@@ -8,12 +8,17 @@ use Twig\TwigFilter;
 
 class ProgressExtensionTest extends TestCase
 {
+    private ProgressExtension $ext;
+
+    protected function setUp(): void
+    {
+        $this->ext = new ProgressExtension();
+    }
+
     public function testGetFilters(): void
     {
-        $ext = new ProgressExtension();
+        $filter = $this->ext->getFilters()[0];
 
-        $filter = $ext->getFilters()[0];
-
-        $this->assertInstanceOf(TwigFilter::class, $filter);
+        self::assertInstanceOf(TwigFilter::class, $filter);
     }
 }

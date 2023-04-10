@@ -9,13 +9,18 @@ use Twig\TwigFilter;
 
 class FormatExtensionTest extends TestCase
 {
+    private FormatExtension $ext;
+
+    protected function setUp(): void
+    {
+        $this->ext = new FormatExtension();
+    }
+
     public function testGetFilters(): void
     {
-        $ext = new FormatExtension();
+        $filter = $this->ext->getFilters()[0];
 
-        $filter = $ext->getFilters()[0];
-
-        $this->assertInstanceOf(TwigFilter::class, $filter);
+        self::assertInstanceOf(TwigFilter::class, $filter);
     }
 
     /**
@@ -23,10 +28,9 @@ class FormatExtensionTest extends TestCase
      * @param string $expected
      * @dataProvider providerInt
      */
-    public function testInt($value, string $expected): void
+    public function testInt(mixed $value, string $expected): void
     {
-        $ext = new FormatExtension();
-        $this->assertSame($expected, $ext->int($value));
+        self::assertSame($expected, $this->ext->int($value));
     }
 
     public function providerInt(): array
@@ -52,15 +56,11 @@ class FormatExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param int $precision
-     * @param string $expected
      * @dataProvider providerFloat
      */
-    public function testFloat($value, int $precision, $expected): void
+    public function testFloat(mixed $value, int $precision, string $expected): void
     {
-        $ext = new FormatExtension();
-        $this->assertSame($expected, $ext->float($value, $precision));
+        self::assertSame($expected, $this->ext->float($value, $precision));
     }
 
     public function providerFloat(): array
@@ -96,8 +96,7 @@ class FormatExtensionTest extends TestCase
      */
     public function testMoney($value, $currency, int $precision, $expected): void
     {
-        $ext = new FormatExtension();
-        $this->assertSame($expected, $ext->money($value, $currency, $precision));
+        self::assertSame($expected, $this->ext->money($value, $currency, $precision));
     }
 
     public function providerMoney(): array
@@ -130,15 +129,11 @@ class FormatExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param int $precision
-     * @param string $expected
      * @dataProvider providerPercents
      */
-    public function testPercents($value, int $precision, $expected): void
+    public function testPercents(mixed $value, int $precision, string $expected): void
     {
-        $ext = new FormatExtension();
-        $this->assertSame($expected, $ext->percents($value, $precision));
+        self::assertSame($expected, $this->ext->percents($value, $precision));
     }
 
     public function providerPercents(): array
@@ -163,14 +158,11 @@ class FormatExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param string $expected
      * @dataProvider providerDateFull
      */
-    public function testDateFull($value, $expected): void
+    public function testDateFull(mixed $value, string $expected): void
     {
-        $ext = new FormatExtension();
-        $this->assertSame($expected, $ext->dateFull($value));
+        self::assertSame($expected, $this->ext->dateFull($value));
     }
 
     public function providerDateFull(): array
@@ -189,14 +181,11 @@ class FormatExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param string $expected
      * @dataProvider providerDateShort
      */
-    public function testDateShort($value, $expected): void
+    public function testDateShort(mixed $value, string $expected): void
     {
-        $ext = new FormatExtension();
-        $this->assertSame($expected, $ext->dateShort($value));
+        self::assertSame($expected, $this->ext->dateShort($value));
     }
 
     public function providerDateShort(): array
@@ -215,14 +204,11 @@ class FormatExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param string $expected
      * @dataProvider providerDateNoYear
      */
-    public function testDateNoYear($value, $expected): void
+    public function testDateNoYear(mixed $value, string $expected): void
     {
-        $ext = new FormatExtension();
-        $this->assertSame($expected, $ext->dateNoYear($value));
+        self::assertSame($expected, $this->ext->dateNoYear($value));
     }
 
     public function providerDateNoYear(): array
