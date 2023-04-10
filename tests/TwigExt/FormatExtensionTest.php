@@ -24,8 +24,6 @@ class FormatExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param string $expected
      * @dataProvider providerInt
      */
     public function testInt(mixed $value, string $expected): void
@@ -88,13 +86,9 @@ class FormatExtensionTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param mixed $currency
-     * @param int $precision
-     * @param string $expected
      * @dataProvider providerMoney
      */
-    public function testMoney($value, $currency, int $precision, $expected): void
+    public function testMoney(mixed $value, mixed $currency, int $precision, string $expected): void
     {
         self::assertSame($expected, $this->ext->money($value, $currency, $precision));
     }
