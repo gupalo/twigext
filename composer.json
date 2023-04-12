@@ -25,7 +25,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Gupalo\\TwigExt\\": "src/TwigExt/"
+            "Gupalo\\TwigExt\\": "src/TwigExt/",
+            "Gupalo\\TwigExtException\\": "src/TwigExtException"
         }
     },
     "autoload-dev": {

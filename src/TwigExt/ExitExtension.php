@@ -2,7 +2,7 @@
 
 namespace Gupalo\TwigExt;
 
-use Gupalo\TwigExt\Exceptions\TwigExitException;
+use Gupalo\TwigExtException\TwigExitException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gupalo\TwigExt\Exceptions;
+namespace Gupalo\TwigExtException;
 
 use RuntimeException;
 
