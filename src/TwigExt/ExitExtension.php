@@ -2,7 +2,7 @@
 
 namespace Gupalo\TwigExt;
 
-use RuntimeException;
+use Gupalo\TwigExt\Exceptions\TwigExitException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -19,8 +19,8 @@ class ExitExtension extends AbstractExtension
         ];
     }
 
-    public function exit(): void
+    public function exit(int $statusCode = 500, mixed $message = ''): void
     {
-        throw new RuntimeException('');
+        throw new TwigExitException($message, $statusCode);
     }
 }
