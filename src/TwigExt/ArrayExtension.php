@@ -19,14 +19,15 @@ class ArrayExtension extends AbstractExtension
         ];
     }
 
-    public function uniq(array $items, bool $keepKeys = false)
+    public function uniq(array $items, bool $keepKeys = false): array
     {
         $result = array_unique($items);
 
         return $keepKeys ? $result : array_values($result);
     }
 
-    public function maxValue($items, string $field) {
+    public function maxValue($items, string $field)
+    {
         $propertyAccessor = new PropertyAccessor();
 
         $result = 0;
@@ -45,7 +46,8 @@ class ArrayExtension extends AbstractExtension
         return $result;
     }
 
-    public function maxRatioValue($items, string $field, string $field2) {
+    public function maxRatioValue($items, string $field, string $field2): float|int
+    {
         $propertyAccessor = new PropertyAccessor();
 
         $result = 0;
@@ -65,7 +67,8 @@ class ArrayExtension extends AbstractExtension
         return $result;
     }
 
-    public function sumValue($items, string $field) {
+    public function sumValue($items, string $field)
+    {
         $propertyAccessor = new PropertyAccessor();
 
         $result = 0;
@@ -82,7 +85,8 @@ class ArrayExtension extends AbstractExtension
         return $result;
     }
 
-    public function arraySum($items) {
+    public function arraySum($items): float|int
+    {
         return array_sum($items);
     }
 }

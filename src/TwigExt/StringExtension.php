@@ -20,20 +20,20 @@ class StringExtension extends AbstractExtension
 
     public function truncate(string $s = null, int $length = 100): string
     {
-        if (mb_strlen($s) < $length) {
+        if (mb_strlen($s ?? '') < $length) {
             return $s ?? '';
         }
 
-        return mb_substr($s, 0, $length) . '&hellip;';
+        return mb_substr($s ?? '', 0, $length) . '&hellip;';
     }
 
     public function underscore(string $s = null, $character = '_'): string
     {
         $result = '';
 
-        $len = mb_strlen($s);
+        $len = mb_strlen($s ?? '');
         for ($i = 0; $i < $len; $i++) {
-            $c = mb_substr($s, $i, 1);
+            $c = mb_substr($s ?? '', $i, 1);
             if ($i === 0) {
                 $c = mb_strtolower($c);
             }
@@ -45,16 +45,16 @@ class StringExtension extends AbstractExtension
 
     public function maskPassword(string $s = null): string
     {
-        return str_pad(mb_substr($s, 0, 3), 8, '*');
+        return str_pad(mb_substr($s ?? '', 0, 3), 8, '*');
     }
 
     public function safeTitle(string $s = null): string
     {
-        return str_replace('"', '\'', $s);
+        return str_replace('"', '\'', $s ?? '');
     }
 
     public function ucfirst(string $s = null): string
     {
-        return ucfirst($s);
+        return ucfirst($s ?? '');
     }
 }

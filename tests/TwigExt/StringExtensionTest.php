@@ -21,4 +21,11 @@ class StringExtensionTest extends TestCase
 
         self::assertInstanceOf(TwigFilter::class, $filter);
     }
+
+    public function testUnderscore(): void
+    {
+        $actual = $this->ext->underscore('CamelCase? ok');
+
+        self::assertSame('camel_case? ok', $actual);
+    }
 }

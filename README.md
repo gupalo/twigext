@@ -30,7 +30,99 @@ You can customize FormatExtension:
 Functions and Filters
 ---------------------
 
-### random_hour, random_day
+### Array
+
+#### uniq(items, keepKeys = false)
+
+`array_unique`
+
+If `keepKeys = false` (default) then `array_values` of the result.
+
+#### max_value(items, field)
+
+Max of `field` values of `items`.
+
+Uses `PropertyAccessor` so it may be object with properties
+
+#### max_ratio_value(items, field, field2)
+
+Max of `field/field2` values of `items`.
+
+Uses `PropertyAccessor` so it may be object with properties
+
+#### sum_value(items, field)
+
+Sum of field values.
+
+Uses `PropertyAccessor` so it may be object with properties
+
+#### array_sum(items)
+
+https://www.php.net/manual/en/function.array-sum.php
+
+
+### Encoding
+
+#### base64_encode
+
+https://www.php.net/manual/en/function.base64-encode.php
+
+#### base64_decode
+
+https://www.php.net/manual/en/function.base64-decode.php
+
+#### md5
+
+https://www.php.net/manual/en/function.md5.php
+
+
+### Exit
+
+#### exit
+
+Throw `TwigExitException`. You app should intercept and process it. 
+
+
+### Format
+
+#### int
+
+#### float
+
+#### money
+
+#### percents
+
+#### date_full
+
+#### date_short
+
+#### date_noyear
+
+
+### Json
+
+#### json_decode
+
+`json_decode` array.
+
+If there will be invalid string then there will be no error, just an empty array.
+
+
+### Progress
+
+#### progress_class
+
+#### progress_percents
+
+#### progress_int
+
+#### progress_float
+
+
+### Random
+
+#### random_hour, random_day
 
 Pseudorandom. Default `1..100`.
 
@@ -66,13 +158,13 @@ Optional params:
 * `max`: if not `1..100`, but `1..max`
 * `salt`: if you need different number at different sites or even at the same page
 
-### random_item
+#### random_item
 
 Pick one random item value from items
 
     {{ random_item(['aaa', 'bbb', 'ccc']) }}
 
-### random_items
+#### random_items
 
 Pick several random items from items
 
@@ -91,3 +183,37 @@ If items is empty then default value (4th argument) is returned: "ouch" in examp
 If you ask for more items that it exists in items then all items will be returned but shuffled: "aaa, bbb" or "bbb, aaa"
 
     {{ random_items({'k1': 'aaa', 'k2': 'bbb', 1000)|join(', ') }}
+
+
+### String
+
+#### truncate(s, length = 100)
+
+Limit length of the string. If it's longer - add `&hellip;` (`...`)
+
+#### underscore(s, character = '_')
+
+Change text to underscore
+
+    {{ 'CamelCase? ok'|undersore }}
+
+Will return `camel_case? ok`
+
+#### mask_password(s)
+
+Keep only first 3 letters and mask next ones
+
+    {{ 'mySuperPassword'|mask_password }}
+
+Will show `myS*****`.
+
+#### safe_title(s)
+
+Prepare value to be inserted into HTML attribute.
+
+    <a title="{{ unsafe_text|safe_title }}">hello</a>
+
+
+#### ucfirst(s)
+
+https://www.php.net/manual/en/function.ucfirst.php
