@@ -27,102 +27,106 @@ You can customize FormatExtension:
             $wrapSpan: false
 
 
-Functions and Filters
----------------------
+ArrayExtensionK
+--------------
 
-### Array
-
-#### uniq(items, keepKeys = false)
+### uniq(items, keepKeys = false)
 
 `array_unique`
 
 If `keepKeys = false` (default) then `array_values` of the result.
 
-#### max_value(items, field)
+### max_value(items, field)
 
 Max of `field` values of `items`.
 
 Uses `PropertyAccessor` so it may be object with properties
 
-#### max_ratio_value(items, field, field2)
+### max_ratio_value(items, field, field2)
 
 Max of `field/field2` values of `items`.
 
 Uses `PropertyAccessor` so it may be object with properties
 
-#### sum_value(items, field)
+### sum_value(items, field)
 
 Sum of field values.
 
 Uses `PropertyAccessor` so it may be object with properties
 
-#### array_sum(items)
+### array_sum(items)
 
 https://www.php.net/manual/en/function.array-sum.php
 
 
-### Encoding
+EncodingExtension
+-----------------
 
-#### base64_encode
+### base64_encode
 
 https://www.php.net/manual/en/function.base64-encode.php
 
-#### base64_decode
+### base64_decode
 
 https://www.php.net/manual/en/function.base64-decode.php
 
-#### md5
+### md5
 
 https://www.php.net/manual/en/function.md5.php
 
 
-### Exit
+ExitExtension
+-------------
 
-#### exit
+### exit
 
 Throw `TwigExitException`. You app should intercept and process it. 
 
 
-### Format
+FormatExtension
+---------------
 
-#### int
+### int
 
-#### float
+### float
 
-#### money
+### money
 
-#### percents
+### percents
 
-#### date_full
+### date_full
 
-#### date_short
+### date_short
 
-#### date_noyear
+### date_noyear
 
 
-### Json
+JsonExtension
+-------------
 
-#### json_decode
+### json_decode
 
 `json_decode` array.
 
 If there will be invalid string then there will be no error, just an empty array.
 
 
-### Progress
+ProgressExtension
+-----------------
 
-#### progress_class
+### progress_class
 
-#### progress_percents
+### progress_percents
 
-#### progress_int
+### progress_int
 
-#### progress_float
+### progress_float
 
 
-### Random
+RandomExtension
+---------------
 
-#### random_hour, random_day
+### random_hour, random_day
 
 Pseudorandom. Default `1..100`.
 
@@ -158,13 +162,13 @@ Optional params:
 * `max`: if not `1..100`, but `1..max`
 * `salt`: if you need different number at different sites or even at the same page
 
-#### random_item
+### random_item
 
 Pick one random item value from items
 
     {{ random_item(['aaa', 'bbb', 'ccc']) }}
 
-#### random_items
+### random_items
 
 Pick several random items from items
 
@@ -185,13 +189,14 @@ If you ask for more items that it exists in items then all items will be returne
     {{ random_items({'k1': 'aaa', 'k2': 'bbb', 1000)|join(', ') }}
 
 
-### String
+StringExtension
+---------------
 
-#### truncate(s, length = 100)
+### truncate(s, length = 100)
 
 Limit length of the string. If it's longer - add `&hellip;` (`...`)
 
-#### underscore(s, character = '_')
+### underscore(s, character = '_')
 
 Change text to underscore
 
@@ -199,7 +204,7 @@ Change text to underscore
 
 Will return `camel_case? ok`
 
-#### mask_password(s)
+### mask_password(s)
 
 Keep only first 3 letters and mask next ones
 
@@ -207,13 +212,13 @@ Keep only first 3 letters and mask next ones
 
 Will show `myS*****`.
 
-#### safe_title(s)
+### safe_title(s)
 
 Prepare value to be inserted into HTML attribute.
 
     <a title="{{ unsafe_text|safe_title }}">hello</a>
 
 
-#### ucfirst(s)
+### ucfirst(s)
 
 https://www.php.net/manual/en/function.ucfirst.php
