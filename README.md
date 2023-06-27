@@ -27,7 +27,7 @@ You can customize FormatExtension:
             $wrapSpan: false
 
 
-ArrayExtensionK
+ArrayExtension
 --------------
 
 ### uniq(items, keepKeys = false)
