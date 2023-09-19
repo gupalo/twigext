@@ -31,6 +31,10 @@ class RandomExtension extends AbstractExtension
 
     public function randomDay(int $max = 100, string $salt = '_random_salt_day'): int
     {
+        if ($max <= 0) {
+            return 0;
+        }
+
         $hash = abs(crc32(md5(date('Ymd') . $salt)));
 
         return ($hash % $max) + 1;
@@ -38,6 +42,10 @@ class RandomExtension extends AbstractExtension
 
     public function randomHour(int $max = 100, string $salt = '_random_salt_hour'): int
     {
+        if ($max <= 0) {
+            return 0;
+        }
+
         $hash = abs(crc32(md5(date('YmdH') . $salt)));
 
         return ($hash % $max) + 1;

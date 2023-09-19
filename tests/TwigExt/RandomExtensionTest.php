@@ -19,7 +19,15 @@ class RandomExtensionTest extends TestCase
         self::assertGreaterThan(1, $random);
         self::assertLessThanOrEqual(10, $random);
         self::assertSame($random, $this->ext->randomDay(10));
-        self::assertSame($random, $this->ext->randomDay(10)); // same if run multiple times same day with the same salt
+
+        // same if run multiple times same day with the same salt
+        self::assertSame($random, $this->ext->randomDay(10));
+
+        // cannot divide by zero; return zero
+        self::assertSame(0, $this->ext->randomDay(0));
+
+        // only positive values make sense in "max" param; return zero
+        self::assertSame(0, $this->ext->randomDay(-100));
     }
 
     public function testRandomHour(): void
@@ -28,7 +36,16 @@ class RandomExtensionTest extends TestCase
         self::assertGreaterThan(1, $random);
         self::assertLessThanOrEqual(10, $random);
         self::assertSame($random, $this->ext->randomHour(10));
-        self::assertSame($random, $this->ext->randomHour(10)); // same if run multiple times same day with the same salt
+
+        // same if run multiple times same day with the same salt
+        self::assertSame($random, $this->ext->randomHour(10));
+
+
+        // cannot divide by zero; return zero
+        self::assertSame(0, $this->ext->randomHour(0));
+
+        // only positive values make sense in "max" param; return zero
+        self::assertSame(0, $this->ext->randomHour(-100));
     }
 
     public function testPick(): void
