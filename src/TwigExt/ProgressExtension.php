@@ -19,7 +19,7 @@ class ProgressExtension extends AbstractExtension
 
     public function progressClass(float $value, float $maxValue, $color = null): string
     {
-        if ($maxValue === 0) {
+        if (abs($maxValue) <= 0.00000001) {
             return '';
         }
 
@@ -53,6 +53,7 @@ class ProgressExtension extends AbstractExtension
 
         $percents = max(0, min(100, $value / $maxValue * 100));
 
+        $result = number_format($percents * 100) . '%';
         if ($funcFormat) {
             $args = [$value];
             if ($arguments) {

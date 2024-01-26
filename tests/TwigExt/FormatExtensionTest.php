@@ -4,34 +4,33 @@ namespace Gupalo\Tests\TwigExt;
 
 use DateTime;
 use Gupalo\TwigExt\FormatExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Twig\TwigFilter;
 
 class FormatExtensionTest extends TestCase
 {
-    private FormatExtension $ext;
+    private static FormatExtension $ext;
 
     protected function setUp(): void
     {
-        $this->ext = new FormatExtension();
+        self::$ext = new FormatExtension();
     }
 
     public function testGetFilters(): void
     {
-        $filter = $this->ext->getFilters()[0];
+        $filter = self::$ext->getFilters()[0];
 
         self::assertInstanceOf(TwigFilter::class, $filter);
     }
 
-    /**
-     * @dataProvider providerInt
-     */
+    #[DataProvider('providerInt')]
     public function testInt(mixed $value, string $expected): void
     {
-        self::assertSame($expected, $this->ext->int($value));
+        self::assertSame($expected, self::$ext->int($value));
     }
 
-    public function providerInt(): array
+    public static function providerInt(): array
     {
         return [
             'zero'                                => [0,            '<span class="text-muted">0</span>'],
@@ -53,15 +52,13 @@ class FormatExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerFloat
-     */
+    #[DataProvider('providerFloat')]
     public function testFloat(mixed $value, int $precision, string $expected): void
     {
-        self::assertSame($expected, $this->ext->float($value, $precision));
+        self::assertSame($expected, self::$ext->float($value, $precision));
     }
 
-    public function providerFloat(): array
+    public static function providerFloat(): array
     {
         return [
             'zero'                               => [0, 2,           '<span class="text-muted">0</span>'],
@@ -85,15 +82,13 @@ class FormatExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerMoney
-     */
+    #[DataProvider('providerMoney')]
     public function testMoney(mixed $value, mixed $currency, int $precision, string $expected): void
     {
-        self::assertSame($expected, $this->ext->money($value, $currency, $precision));
+        self::assertSame($expected, self::$ext->money($value, $currency, $precision));
     }
 
-    public function providerMoney(): array
+    public static function providerMoney(): array
     {
         return [
             'zero'                               => [0, '$', 2,           '<span class="text-muted">0</span>'],
@@ -122,15 +117,13 @@ class FormatExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerPercents
-     */
+    #[DataProvider('providerPercents')]
     public function testPercents(mixed $value, int $precision, string $expected): void
     {
-        self::assertSame($expected, $this->ext->percents($value, $precision));
+        self::assertSame($expected, self::$ext->percents($value, $precision));
     }
 
-    public function providerPercents(): array
+    public static function providerPercents(): array
     {
         return [
             'zero'                               => [0, 2,           '<span class="text-muted">0<span class="format-dot text-muted">.</span><span class="format-fractional text-muted">00</span>%</span>'],
@@ -151,15 +144,13 @@ class FormatExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerDateFull
-     */
+    #[DataProvider('providerDateFull')]
     public function testDateFull(mixed $value, string $expected): void
     {
-        self::assertSame($expected, $this->ext->dateFull($value));
+        self::assertSame($expected, self::$ext->dateFull($value));
     }
 
-    public function providerDateFull(): array
+    public static function providerDateFull(): array
     {
         return [
             'ymd' => ['2020-01-01', '2020-01-01 00:00:00'],
@@ -174,15 +165,13 @@ class FormatExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerDateShort
-     */
+    #[DataProvider('providerDateShort')]
     public function testDateShort(mixed $value, string $expected): void
     {
-        self::assertSame($expected, $this->ext->dateShort($value));
+        self::assertSame($expected, self::$ext->dateShort($value));
     }
 
-    public function providerDateShort(): array
+    public static function providerDateShort(): array
     {
         return [
             'ymd' => ['2020-01-01', '2020-01-01'],
@@ -197,15 +186,13 @@ class FormatExtensionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerDateNoYear
-     */
-    public function testDateNoYear(mixed $value, string $expected): void
+    #[DataProvider('providerDateNoYear')]
+    public static function testDateNoYear(mixed $value, string $expected): void
     {
-        self::assertSame($expected, $this->ext->dateNoYear($value));
+        self::assertSame($expected, self::$ext->dateNoYear($value));
     }
 
-    public function providerDateNoYear(): array
+    public static function providerDateNoYear(): array
     {
         return [
             'ymd' => ['2020-01-01', '1 Jan'],
