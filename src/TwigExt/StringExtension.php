@@ -11,6 +11,7 @@ class StringExtension extends AbstractExtension
     {
         return [
             new TwigFilter('truncate', [$this, 'truncate'], ['is_safe' => ['html']]),
+            new TwigFilter('truncate_html', [$this, 'truncateHtml'], ['is_safe' => ['html']]),
             new TwigFilter('underscore', [$this, 'underscore'], ['is_safe' => ['html']]),
             new TwigFilter('mask_password', [$this, 'maskPassword'], ['is_safe' => ['html']]),
             new TwigFilter('safe_title', [$this, 'safeTitle'], ['is_safe' => ['html']]),
@@ -25,6 +26,15 @@ class StringExtension extends AbstractExtension
         }
 
         return mb_substr($s ?? '', 0, $length) . '&hellip;';
+    }
+
+    public function truncateHtml(string $s = null, int $length = 100): string
+    {
+        if (mb_strlen($s ?? '') < $length) {
+            return $s ?? '';
+        }
+
+        return htmlspecialchars(mb_substr($s ?? '', 0, $length)) . '&hellip;';
     }
 
     public function underscore(string $s = null, $character = '_'): string
