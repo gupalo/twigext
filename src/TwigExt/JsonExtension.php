@@ -12,7 +12,7 @@ class JsonExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('json_decode', [$this, 'jsonDecode'], ['is_safe' => ['html']]),
+            new TwigFilter('json_decode', $this->jsonDecode(...), ['is_safe' => ['html']]),
         ];
     }
 

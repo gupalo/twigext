@@ -39,16 +39,17 @@ class FormatExtension extends AbstractExtension
         $this->wrapSpan = $wrapSpan;
     }
 
+    /** @noinspection PhpArgumentWithoutNamedIdentifierInspection */
     public function getFilters(): array
     {
         return [
-            new TwigFilter('int', [$this, 'int'], ['is_safe' => ['html']]),
-            new TwigFilter('float', [$this, 'float'], ['is_safe' => ['html']]),
-            new TwigFilter('money', [$this, 'money'], ['is_safe' => ['html']]),
-            new TwigFilter('percents', [$this, 'percents'], ['is_safe' => ['html']]),
-            new TwigFilter('date_full', [$this, 'dateFull'], ['is_safe' => ['html']]),
-            new TwigFilter('date_short', [$this, 'dateShort'], ['is_safe' => ['html']]),
-            new TwigFilter('date_noyear', [$this, 'dateNoYear'], ['is_safe' => ['html']]),
+            new TwigFilter('int', $this->int(...), ['is_safe' => ['html']]),
+            new TwigFilter('float', $this->float(...), ['is_safe' => ['html']]),
+            new TwigFilter('money', $this->money(...), ['is_safe' => ['html']]),
+            new TwigFilter('percents', $this->percents(...), ['is_safe' => ['html']]),
+            new TwigFilter('date_full', $this->dateFull(...), ['is_safe' => ['html']]),
+            new TwigFilter('date_short', $this->dateShort(...), ['is_safe' => ['html']]),
+            new TwigFilter('date_noyear', $this->dateNoYear(...), ['is_safe' => ['html']]),
         ];
     }
 
@@ -60,6 +61,7 @@ class FormatExtension extends AbstractExtension
         return $result ?? number_format((float)$value);
     }
 
+    /** @noinspection PhpUnnecessaryLocalVariableInspection */
     public function float($value = null, int $precision = 2): string
     {
         $value = $this->numberFromString($value);

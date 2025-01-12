@@ -11,11 +11,11 @@ class ArrayExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('uniq', [$this, 'uniq'], ['is_safe' => ['html']]),
-            new TwigFilter('max_value', [$this, 'maxValue'], ['is_safe' => ['html']]),
-            new TwigFilter('max_ratio_value', [$this, 'maxRatioValue'], ['is_safe' => ['html']]),
-            new TwigFilter('sum_value', [$this, 'sumValue'], ['is_safe' => ['html']]),
-            new TwigFilter('array_sum', [$this, 'arraySum'], ['is_safe' => ['html']]),
+            new TwigFilter('uniq', $this->uniq(...), ['is_safe' => ['html']]),
+            new TwigFilter('max_value', $this->maxValue(...), ['is_safe' => ['html']]),
+            new TwigFilter('max_ratio_value', $this->maxRatioValue(...), ['is_safe' => ['html']]),
+            new TwigFilter('sum_value', $this->sumValue(...), ['is_safe' => ['html']]),
+            new TwigFilter('array_sum', $this->arraySum(...), ['is_safe' => ['html']]),
         ];
     }
 

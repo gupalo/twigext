@@ -10,10 +10,10 @@ class ProgressExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('progress_class', [$this, 'progressClass'], ['is_safe' => ['html']]),
-            new TwigFilter('progress_percents', [$this, 'progressPercents'], ['is_safe' => ['html']]),
-            new TwigFilter('progress_int', [$this, 'progressInt'], ['is_safe' => ['html']]),
-            new TwigFilter('progress_float', [$this, 'progressFloat'], ['is_safe' => ['html']]),
+            new TwigFilter('progress_class', $this->progressClass(...), ['is_safe' => ['html']]),
+            new TwigFilter('progress_percents', $this->progressPercents(...), ['is_safe' => ['html']]),
+            new TwigFilter('progress_int', $this->progressInt(...), ['is_safe' => ['html']]),
+            new TwigFilter('progress_float', $this->progressFloat(...), ['is_safe' => ['html']]),
         ];
     }
 
@@ -45,7 +45,7 @@ class ProgressExtension extends AbstractExtension
         return $this->progress($value, $maxValue, [$this, 'float'], [$precision]);
     }
 
-    private function progress($value = null, ?float $maxValue = 0, callable $funcFormat = null, $arguments = null): string
+    private function progress($value = null, ?float $maxValue = 0, ?callable $funcFormat = null, $arguments = null): string
     {
         if (!$maxValue || !$value || ($value < 0.0001 && $value > -0.0001)) {
             return '';
@@ -65,7 +65,8 @@ class ProgressExtension extends AbstractExtension
         return sprintf('<div class="bar" style="width: %s%%"></div><span class="value">%s</span>', $percents, $result);
     }
 
-    private function int(float $value = null): string
+    /** @noinspection PhpSameParameterValueInspection */
+    private function int(?float $value = null): string
     {
         if ($value === null) {
             return '-';
@@ -74,21 +75,23 @@ class ProgressExtension extends AbstractExtension
         return number_format($value);
     }
 
-    private function float(?float $value = null, $precision = 2): string
+    /** @noinspection PhpSameParameterValueInspection */
+    private function float(?float $value = null, int $decimals = 2): string
     {
         if ($value === null) {
             return '-';
         }
 
-        return number_format($value, $precision);
+        return number_format($value, $decimals);
     }
 
-    private function percents(?float $value = null, $precision = 2): string
+    /** @noinspection PhpSameParameterValueInspection */
+    private function percents(?float $value = null, int $decimals = 2): string
     {
         if ($value === null) {
             return '-';
         }
 
-        return number_format(100 * $value, $precision) . '%';
+        return number_format(100 * $value, $decimals) . '%';
     }
 }

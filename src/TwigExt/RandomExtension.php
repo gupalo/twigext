@@ -12,20 +12,20 @@ class RandomExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('random_day', [$this, 'randomDay'], ['is_safe' => ['html']]),
-            new TwigFilter('random_hour', [$this, 'randomHour'], ['is_safe' => ['html']]),
-            new TwigFilter('random_item', [$this, 'randomItem'], ['is_safe' => ['html']]),
-            new TwigFilter('random_items', [$this, 'randomItems'], ['is_safe' => ['html']]),
+            new TwigFilter('random_day', $this->randomDay(...), ['is_safe' => ['html']]),
+            new TwigFilter('random_hour', $this->randomHour(...), ['is_safe' => ['html']]),
+            new TwigFilter('random_item', $this->randomItem(...), ['is_safe' => ['html']]),
+            new TwigFilter('random_items', $this->randomItems(...), ['is_safe' => ['html']]),
         ];
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('random_day', [$this, 'randomDay'], ['is_safe' => ['html']]),
-            new TwigFunction('random_hour', [$this, 'randomHour'], ['is_safe' => ['html']]),
-            new TwigFunction('random_item', [$this, 'randomItem'], ['is_safe' => ['html']]),
-            new TwigFunction('random_items', [$this, 'randomItems'], ['is_safe' => ['html']]),
+            new TwigFunction('random_day', $this->randomDay(...), ['is_safe' => ['html']]),
+            new TwigFunction('random_hour', $this->randomHour(...), ['is_safe' => ['html']]),
+            new TwigFunction('random_item', $this->randomItem(...), ['is_safe' => ['html']]),
+            new TwigFunction('random_items', $this->randomItems(...), ['is_safe' => ['html']]),
         ];
     }
 

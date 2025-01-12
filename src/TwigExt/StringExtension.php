@@ -10,12 +10,12 @@ class StringExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('truncate', [$this, 'truncate'], ['is_safe' => ['html']]),
-            new TwigFilter('truncate_html', [$this, 'truncateHtml'], ['is_safe' => ['html']]),
-            new TwigFilter('underscore', [$this, 'underscore'], ['is_safe' => ['html']]),
-            new TwigFilter('mask_password', [$this, 'maskPassword'], ['is_safe' => ['html']]),
-            new TwigFilter('safe_title', [$this, 'safeTitle'], ['is_safe' => ['html']]),
-            new TwigFilter('ucfirst', [$this, 'ucfirst'], ['is_safe' => ['html']]),
+            new TwigFilter('truncate', $this->truncate(...), ['is_safe' => ['html']]),
+            new TwigFilter('truncate_html', $this->truncateHtml(...), ['is_safe' => ['html']]),
+            new TwigFilter('underscore', $this->underscore(...), ['is_safe' => ['html']]),
+            new TwigFilter('mask_password', $this->maskPassword(...), ['is_safe' => ['html']]),
+            new TwigFilter('safe_title', $this->safeTitle(...), ['is_safe' => ['html']]),
+            new TwigFilter('ucfirst', $this->ucfirst(...), ['is_safe' => ['html']]),
         ];
     }
 
@@ -63,6 +63,7 @@ class StringExtension extends AbstractExtension
         return str_replace('"', '\'', $s ?? '');
     }
 
+    /** @noinspection SpellCheckingInspection */
     public function ucfirst(?string $s = null): string
     {
         return ucfirst($s ?? '');
