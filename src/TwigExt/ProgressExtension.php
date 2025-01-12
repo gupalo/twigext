@@ -74,7 +74,7 @@ class ProgressExtension extends AbstractExtension
         return number_format($value);
     }
 
-    private function float(float $value = null, $precision = 2): string
+    private function float(?float $value = null, $precision = 2): string
     {
         if ($value === null) {
             return '-';
@@ -83,7 +83,7 @@ class ProgressExtension extends AbstractExtension
         return number_format($value, $precision);
     }
 
-    private function percents(float $value = null, $precision = 2): string
+    private function percents(?float $value = null, $precision = 2): string
     {
         if ($value === null) {
             return '-';

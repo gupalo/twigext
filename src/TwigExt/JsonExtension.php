@@ -16,7 +16,7 @@ class JsonExtension extends AbstractExtension
         ];
     }
 
-    public function jsonDecode(string $s = null): array
+    public function jsonDecode(?string $s = null): array
     {
         try {
             $result = Json::toArray($s);

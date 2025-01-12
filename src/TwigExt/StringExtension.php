@@ -19,7 +19,7 @@ class StringExtension extends AbstractExtension
         ];
     }
 
-    public function truncate(string $s = null, int $length = 100): string
+    public function truncate(?string $s = null, int $length = 100): string
     {
         if (mb_strlen($s ?? '') < $length) {
             return $s ?? '';
@@ -28,7 +28,7 @@ class StringExtension extends AbstractExtension
         return mb_substr($s ?? '', 0, $length) . '&hellip;';
     }
 
-    public function truncateHtml(string $s = null, int $length = 100): string
+    public function truncateHtml(?string $s = null, int $length = 100): string
     {
         if (mb_strlen($s ?? '') < $length) {
             return $s ?? '';
@@ -37,7 +37,7 @@ class StringExtension extends AbstractExtension
         return htmlspecialchars(mb_substr($s ?? '', 0, $length)) . '&hellip;';
     }
 
-    public function underscore(string $s = null, $character = '_'): string
+    public function underscore(?string $s = null, $character = '_'): string
     {
         $result = '';
 
@@ -53,17 +53,17 @@ class StringExtension extends AbstractExtension
         return $result;
     }
 
-    public function maskPassword(string $s = null): string
+    public function maskPassword(?string $s = null): string
     {
         return str_pad(mb_substr($s ?? '', 0, 3), 8, '*');
     }
 
-    public function safeTitle(string $s = null): string
+    public function safeTitle(?string $s = null): string
     {
         return str_replace('"', '\'', $s ?? '');
     }
 
-    public function ucfirst(string $s = null): string
+    public function ucfirst(?string $s = null): string
     {
         return ucfirst($s ?? '');
     }
