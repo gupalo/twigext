@@ -4,23 +4,24 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": ">=8.1",
-        "gupalo/arrayutils": "^1.9",
-        "gupalo/dateutils": "^1.13",
+        "php": ">=8.4",
+        "gupalo/arrayutils": "^1.10",
+        "gupalo/dateutils": "^1.14",
         "gupalo/json": "^1.0",
-        "symfony/property-access": "^5.4|^6.0|^7.0",
+        "symfony/property-access": "^5.4|^6.0|^7.0|^8.0",
         "twig/twig": "^3.5"
     },
     "require-dev": {
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^10.0"
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^11.5"
     },
     "config": {
         "preferred-install": {
             "*": "dist"
         },
         "platform": {
-            "php": "8.1"
+            "php": "8.4"
         },
         "sort-packages": true
     },

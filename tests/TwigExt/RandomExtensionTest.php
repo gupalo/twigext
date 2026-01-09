@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 class RandomExtensionTest extends TestCase
 {
+    private RandomExtension $ext;
+
     protected function setUp(): void
     {
         $this->ext = new RandomExtension();

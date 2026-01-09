@@ -8,7 +8,7 @@ use Twig\TwigFilter;
 
 class FormatExtension extends AbstractExtension
 {
-    private const DEFAULT_TRANSLATIONS = [
+    private const array DEFAULT_TRANSLATIONS = [
         'span' => 'span',
         'text-muted' => 'text-muted',
         'text-danger' => 'text-danger',
@@ -27,7 +27,7 @@ class FormatExtension extends AbstractExtension
         'format-fractional-zero' => 'text-muted',
         'format-percent-sign' => '',
     ];
-    private const NUMBER_THOUSAND_SEPARATORS = [',', ' ', '_'];
+    private const array NUMBER_THOUSAND_SEPARATORS = [',', ' ', '_'];
 
     private array $translations;
 

@@ -63,7 +63,6 @@ class StringExtension extends AbstractExtension
         return str_replace('"', '\'', $s ?? '');
     }
 
-    /** @noinspection SpellCheckingInspection */
     public function ucfirst(?string $s = null): string
     {
         return ucfirst($s ?? '');
