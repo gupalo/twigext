@@ -19,6 +19,7 @@ class ArrayExtension extends AbstractExtension
         ];
     }
 
+    /** @param array<mixed> $items @return array<mixed> */
     public function uniq(array $items, bool $keepKeys = false): array
     {
         $result = array_unique($items);
@@ -26,7 +27,8 @@ class ArrayExtension extends AbstractExtension
         return $keepKeys ? $result : array_values($result);
     }
 
-    public function maxValue($items, string $field)
+    /** @param iterable<mixed> $items */
+    public function maxValue(iterable $items, string $field): int|float
     {
         $propertyAccessor = new PropertyAccessor();
 
@@ -46,7 +48,8 @@ class ArrayExtension extends AbstractExtension
         return $result;
     }
 
-    public function maxRatioValue($items, string $field, string $field2): float|int
+    /** @param iterable<mixed> $items */
+    public function maxRatioValue(iterable $items, string $field, string $field2): float|int
     {
         $propertyAccessor = new PropertyAccessor();
 
@@ -67,7 +70,8 @@ class ArrayExtension extends AbstractExtension
         return $result;
     }
 
-    public function sumValue($items, string $field)
+    /** @param iterable<mixed> $items */
+    public function sumValue(iterable $items, string $field): int|float
     {
         $propertyAccessor = new PropertyAccessor();
 
@@ -85,7 +89,8 @@ class ArrayExtension extends AbstractExtension
         return $result;
     }
 
-    public function arraySum($items): float|int
+    /** @param array<int|float> $items */
+    public function arraySum(array $items): float|int
     {
         return array_sum($items);
     }

@@ -17,7 +17,7 @@ class ProgressExtension extends AbstractExtension
         ];
     }
 
-    public function progressClass(float $value, float $maxValue, $color = null): string
+    public function progressClass(float $value, float $maxValue, ?string $color = null): string
     {
         if (abs($maxValue) <= 0.00000001) {
             return '';
@@ -30,22 +30,23 @@ class ProgressExtension extends AbstractExtension
         ]);
     }
 
-    public function progressPercents(?float $value, $maxValue = 1): string
+    public function progressPercents(?float $value, ?float $maxValue = 1): string
     {
         return $this->progress($value, $maxValue, [$this, 'percents']);
     }
 
-    public function progressInt(?int $value, $maxValue): string
+    public function progressInt(?int $value, ?float $maxValue): string
     {
         return $this->progress($value, $maxValue, [$this, 'int']);
     }
 
-    public function progressFloat(?float $value, $maxValue, $precision = 2): string
+    public function progressFloat(?float $value, ?float $maxValue, int $precision = 2): string
     {
         return $this->progress($value, $maxValue, [$this, 'float'], [$precision]);
     }
 
-    private function progress($value = null, ?float $maxValue = 0, ?callable $funcFormat = null, $arguments = null): string
+    /** @param array<mixed>|null $arguments */
+    private function progress(int|float|null $value = null, ?float $maxValue = 0, ?callable $funcFormat = null, ?array $arguments = null): string
     {
         if (!$maxValue || !$value || ($value < 0.0001 && $value > -0.0001)) {
             return '';

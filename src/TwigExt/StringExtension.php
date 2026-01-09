@@ -37,7 +37,7 @@ class StringExtension extends AbstractExtension
         return htmlspecialchars(mb_substr($s ?? '', 0, $length)) . '&hellip;';
     }
 
-    public function underscore(?string $s = null, $character = '_'): string
+    public function underscore(?string $s = null, string $character = '_'): string
     {
         $result = '';
 

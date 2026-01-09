@@ -29,10 +29,12 @@ class FormatExtension extends AbstractExtension
     ];
     private const array NUMBER_THOUSAND_SEPARATORS = [',', ' ', '_'];
 
+    /** @var array<string, string> */
     private array $translations;
 
     private bool $wrapSpan;
 
+    /** @param array<string, string> $translations */
     public function __construct(array $translations = [], bool $wrapSpan = true)
     {
         $this->translations = $translations;
@@ -53,7 +55,7 @@ class FormatExtension extends AbstractExtension
         ];
     }
 
-    public function int($value = null): string
+    public function int(mixed $value = null): string
     {
         $value = $this->numberFromString($value);
         $result = $this->getSpecialNumberResult($value);
@@ -62,7 +64,7 @@ class FormatExtension extends AbstractExtension
     }
 
     /** @noinspection PhpUnnecessaryLocalVariableInspection */
-    public function float($value = null, int $precision = 2): string
+    public function float(mixed $value = null, int $precision = 2): string
     {
         $value = $this->numberFromString($value);
         $result = $this->getSpecialNumberResult($value);
@@ -76,7 +78,7 @@ class FormatExtension extends AbstractExtension
         return $result;
     }
 
-    public function money($value = null, string $currency = '', int $precision = 2): string
+    public function money(mixed $value = null, string $currency = '', int $precision = 2): string
     {
         $value = $this->numberFromString($value);
         $result = $this->getSpecialNumberResult($value);
@@ -103,7 +105,7 @@ class FormatExtension extends AbstractExtension
         return $result;
     }
 
-    public function percents($value = null, $precision = 2): string
+    public function percents(mixed $value = null, int $precision = 2): string
     {
         $result = $this->getNullErrResult($value);
         if ($result !== null) {
@@ -127,22 +129,22 @@ class FormatExtension extends AbstractExtension
         return $result;
     }
 
-    public function dateFull($value): string
+    public function dateFull(mixed $value): string
     {
         return $this->dateFormat($value, DateUtils::FORMAT_FULL);
     }
 
-    public function dateShort($value): string
+    public function dateShort(mixed $value): string
     {
         return $this->dateFormat($value, DateUtils::FORMAT_SHORT);
     }
 
-    public function dateNoYear($value): string
+    public function dateNoYear(mixed $value): string
     {
         return $this->dateFormat($value, 'j M');
     }
 
-    private function dateFormat($value, string $format = DateUtils::FORMAT_FULL): string
+    private function dateFormat(mixed $value, string $format = DateUtils::FORMAT_FULL): string
     {
         if ($value) {
             $value = DateUtils::create($value);
@@ -155,12 +157,12 @@ class FormatExtension extends AbstractExtension
         return $value->format($this->trans($format));
     }
 
-    private function isAlmostZero($value): bool
+    private function isAlmostZero(mixed $value): bool
     {
         return ($value > -0.0001 && $value < 0.0001);
     }
 
-    protected function numberFromString($value)
+    protected function numberFromString(mixed $value): mixed
     {
         if (is_string($value)) {
             $value = str_replace(self::NUMBER_THOUSAND_SEPARATORS, '', $value);
@@ -169,7 +171,7 @@ class FormatExtension extends AbstractExtension
         return $value;
     }
 
-    private function getSpecialNumberResult($value): ?string
+    private function getSpecialNumberResult(mixed $value): ?string
     {
         if ($value === null) {
             return $this->spanMuted('-');
@@ -185,7 +187,7 @@ class FormatExtension extends AbstractExtension
         return null;
     }
 
-    private function getNullErrResult($value): ?string
+    private function getNullErrResult(mixed $value): ?string
     {
         if ($value === null) {
             return $this->spanMuted('-');

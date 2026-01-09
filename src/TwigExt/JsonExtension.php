@@ -16,6 +16,7 @@ class JsonExtension extends AbstractExtension
         ];
     }
 
+    /** @return array<mixed> */
     public function jsonDecode(?string $s = null): array
     {
         try {

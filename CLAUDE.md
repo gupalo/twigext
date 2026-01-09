@@ -23,7 +23,7 @@ This is `gupalo/twigext`, a PHP library providing Twig template extensions. It o
 ```bash
 ./vendor/bin/phpstan analyse
 ```
-PHPStan is configured at level 4 via `phpstan.dist.neon`.
+PHPStan is configured at level 5 via `phpstan.dist.neon`.
 
 ### Install Dependencies
 ```bash
